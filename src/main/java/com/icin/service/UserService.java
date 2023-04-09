@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.icin.dto.User;
+import com.icin.dto.UserLogin;
 import com.icin.entity.UserEntity;
 import com.icin.repository.UserRepo;
 
@@ -24,5 +25,10 @@ public class UserService {
 		if(entity != null)
 			return "Success";
 		return "failure";
+	}
+	
+	public String checkUser(UserLogin login) {
+		UserEntity entity = repo.findByEmailAndPassword(login.getEmail(), login.getPassword());
+		return entity.toString();
 	}
 }
