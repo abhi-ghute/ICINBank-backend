@@ -1,9 +1,13 @@
 package com.icin.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 
 @Table(name="user")
@@ -21,6 +25,11 @@ public class UserEntity {
 	private String aadharNo;
 	private String panCard;
 	private String gender;
+	private String status="Disabled";
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "acid",referencedColumnName = "id",unique = true)
+	private UserActionEntity actionEntity;
 	
 	public Integer getId() {
 		return id;
@@ -75,5 +84,17 @@ public class UserEntity {
 	}
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+	public void setActionEntity(UserActionEntity actionEntity) {
+		this.actionEntity = actionEntity;
+	}
+	public UserActionEntity getActionEntity() {
+		return actionEntity;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public String getStatus() {
+		return status;
 	}
 }

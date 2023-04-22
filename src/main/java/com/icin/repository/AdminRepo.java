@@ -8,4 +8,5 @@ import com.icin.entity.AdminEntity;
 @Repository
 public interface AdminRepo extends JpaRepository<AdminEntity, Integer> {
 
+	public AdminEntity findByUserNameAndPassword(String userName, String password);
 }

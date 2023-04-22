@@ -10,6 +10,7 @@ public class User {
 	private String aadharNo;
 	private String panCard;
 	private String gender;
+	private String status="Disabled";
 	
 	public String getFirstName() {
 		return firstName;
@@ -58,5 +59,11 @@ public class User {
 	}
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public String getStatus() {
+		return status;
 	}
 }
