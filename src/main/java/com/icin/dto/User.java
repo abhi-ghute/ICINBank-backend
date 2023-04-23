@@ -12,6 +12,8 @@ public class User {
 	private String gender;
 	private String status="Disabled";
 	
+	private UserActions actionEntity;
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -65,5 +67,11 @@ public class User {
 	}
 	public String getStatus() {
 		return status;
+	}
+	public void setActionEntity(UserActions actionEntity) {
+		this.actionEntity = actionEntity;
+	}
+	public UserActions getActionEntity() {
+		return actionEntity;
 	}
 }

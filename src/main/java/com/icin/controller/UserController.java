@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.icin.dto.User;
@@ -34,7 +35,12 @@ public class UserController {
 	}
 	
 	@GetMapping("getAll")
-	public List<UserEntity> getAll() {
-		return service.getAll();
+	public List<UserEntity> getAll(@RequestParam String status) {
+		return service.getAll(status);
+	}
+	
+	@GetMapping("getUser")
+	public UserEntity getUser(@RequestParam Integer id) {
+		return service.getUser(id);
 	}
 }

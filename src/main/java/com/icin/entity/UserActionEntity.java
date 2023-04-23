@@ -13,9 +13,9 @@ public class UserActionEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private boolean deposit = false;
-	private boolean withdrawal = false;
-	private boolean transfer = false;
+	private boolean deposit = true;
+	private boolean withdrawal = true;
+	private boolean transfer = true;
 	
 	public Integer getId() {
 		return id;

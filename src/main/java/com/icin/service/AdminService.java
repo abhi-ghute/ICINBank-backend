@@ -15,10 +15,9 @@ public class AdminService {
 	
 	public String login(Admin admin) {
 		AdminEntity entity = repo.findByUserNameAndPassword(admin.getUserName(), admin.getPassword());
-		System.out.println(admin.getPassword());
 		if (entity!=null) {
 			return "admin";
 		}
-		return null;
+		return "failure";
 	}
 }

@@ -1,5 +1,7 @@
 package com.icin.entity;
 
+import com.icin.dto.AccountNumberGenerator;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,6 +28,10 @@ public class UserEntity {
 	private String panCard;
 	private String gender;
 	private String status="Disabled";
+	private String accountNumber=AccountNumberGenerator.generateAccountNumber();
+	private String accountType="Saving";
+	private Long accountBalance =500l;
+	private String ifcs="ICIN53K";
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "acid",referencedColumnName = "id",unique = true)
@@ -96,5 +102,29 @@ public class UserEntity {
 	}
 	public String getStatus() {
 		return status;
+	}
+	public String getAccountNumber() {
+		return accountNumber;
+	}
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+	public String getAccountType() {
+		return accountType;
+	}
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
+	}
+	public Long getAccountBalance() {
+		return accountBalance;
+	}
+	public void setAccountBalance(Long accountBalance) {
+		this.accountBalance = accountBalance;
+	}
+	public String getIfcs() {
+		return ifcs;
+	}
+	public void setIfcs(String ifcs) {
+		this.ifcs = ifcs;
 	}
 }

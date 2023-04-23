@@ -3,9 +3,9 @@ package com.icin.dto;
 public class UserActions {
 
 	private Integer uid;
-	private boolean deposit=false;
-	private boolean withdrawal=false;
-	private boolean transfer=false;
+	private boolean deposit=true;
+	private boolean withdrawal=true;
+	private boolean transfer=true;
 	
 	public void setUid(Integer uid) {
 		this.uid = uid;
