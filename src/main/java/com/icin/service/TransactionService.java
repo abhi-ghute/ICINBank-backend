@@ -8,6 +8,9 @@ import com.icin.dto.Transaction;
 import com.icin.entity.TransactionEntity;
 import com.icin.entity.UserEntity;
 import com.icin.repository.TransactionRepo;
+import com.icin.repository.UserRepo;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class TransactionService {
@@ -15,15 +18,22 @@ public class TransactionService {
 	@Autowired
 	TransactionRepo repo;
 	
+	@Autowired
+	UserRepo userRepo;
+	
+	@Transactional
 	public String deposit(Transaction transaction) {
 		
 		TransactionEntity entity = new TransactionEntity();
-		UserEntity user = 
+		UserEntity user = userRepo.findById(transaction.getUid()).get();
+		
+		user.setAccountBalance(transaction.getAmount()+user.getAccountBalance());
 		
 		BeanUtils.copyProperties(transaction, entity);
 		
 		entity = repo.save(entity);
 		if(entity!=null) {
+			userRepo.save(user);
 			return "success";
 		}
 				
@@ -31,7 +41,23 @@ public class TransactionService {
 	}
 	
 	public String withdrawal(Transaction transaction) {
-		return "";
+		TransactionEntity entity = new TransactionEntity();
+		UserEntity user = userRepo.findById(transaction.getUid()).get();
+		
+		if(transaction.getAmount()>user.getAccountBalance()) {
+			return "lowBal";
+		}
+		user.setAccountBalance(user.getAccountBalance()-transaction.getAmount());
+		
+		BeanUtils.copyProperties(transaction, entity);
+		
+		entity = repo.save(entity);
+		if(entity!=null) {
+			userRepo.save(user);
+			return "success";
+		}
+				
+		return "failed";
 	}
 	
 	public String transfer(Transaction transaction) {

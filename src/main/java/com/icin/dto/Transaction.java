@@ -5,7 +5,7 @@ public class Transaction {
 	private Integer uid;
 	private String primaryAccountNumber;
 	private String secondaryAccountNumber;
-	private String amount;
+	private Long amount;
 	private String refrenceNumber;
 	private String description;
 	
@@ -27,10 +27,10 @@ public class Transaction {
 	public void setSecondaryAccountNumber(String secondaryAccountNumber) {
 		this.secondaryAccountNumber = secondaryAccountNumber;
 	}
-	public String getAmount() {
+	public Long getAmount() {
 		return amount;
 	}
-	public void setAmount(String amount) {
+	public void setAmount(Long amount) {
 		this.amount = amount;
 	}
 	public String getRefrenceNumber() {

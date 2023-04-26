@@ -20,16 +20,16 @@ public class TransactionController {
 	
 	@PostMapping("deposit")
 	public String deposit(@RequestBody Transaction transaction) {
-		return service.deposit();
+		return service.deposit(transaction);
 	}
 	
 	@PostMapping("withdrawal")
 	public String withdrawal(@RequestBody Transaction transaction) {
-		return service.withdrawal();
+		return service.withdrawal(transaction);
 	}
 	
 	@PostMapping("transfer")
 	public String transfer(@RequestBody Transaction transaction) {
-		return service.transfer();
+		return service.transfer(transaction);
 	}
 }
