@@ -126,4 +126,21 @@ public class UserService {
 		}else
 			return "failure";
 	}
+	
+	public List<Object> chequeRequests(){
+		
+		return checkRepo.findByStatus("Requested");
+	}
+	
+	@Transactional
+	public String approveRequest(Integer id) {
+		
+		CheckbookEntity entity = checkRepo.findById(id).get();
+		
+		entity.setStatus("Approved");
+		
+		checkRepo.save(entity);
+		
+		return "Success";
+	}
 }

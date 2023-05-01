@@ -1,14 +1,20 @@
 package com.icin.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.icin.dto.Admin;
 import com.icin.dto.User;
+import com.icin.entity.CheckbookEntity;
+import com.icin.entity.TransactionEntity;
 import com.icin.entity.UserEntity;
 import com.icin.service.AdminService;
 import com.icin.service.UserService;
@@ -45,5 +51,17 @@ public class AdminController {
 	public String unblock(@RequestBody UserEntity entity)
 	{
 		return userService.unblock(entity);
+	}
+	
+	@GetMapping("chequeRequests")
+	public List<Object> chequeRequests()
+	{
+		return userService.chequeRequests();
+	}
+	
+	@GetMapping("approveRequest")
+	public String approveRequest(@RequestParam Integer id)
+	{
+		return userService.approveRequest(id);
 	}
 }

@@ -19,6 +19,7 @@ public class TransactionEntity {
 	private Long amount;
 	private String refrenceNumber;
 	private String description;
+	private String holderName;
 	
 	public Integer getId() {
 		return id;
@@ -61,5 +62,11 @@ public class TransactionEntity {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public void setHolderName(String holderName) {
+		this.holderName = holderName;
+	}
+	public String getHolderName() {
+		return holderName;
 	}
 }

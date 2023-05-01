@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.icin.dto.Transaction;
 import com.icin.entity.TransactionEntity;
+import com.icin.entity.UserActionEntity;
 import com.icin.entity.UserEntity;
 import com.icin.repository.TransactionRepo;
 import com.icin.repository.UserRepo;
@@ -29,6 +30,9 @@ public class TransactionService {
 		TransactionEntity entity = new TransactionEntity();
 		UserEntity user = userRepo.findById(transaction.getUid()).get();
 		
+		if(!user.getActionEntity().isDeposit()) {
+			return "unAuthorized";
+		}
 		user.setAccountBalance(transaction.getAmount()+user.getAccountBalance());
 		
 		BeanUtils.copyProperties(transaction, entity);
@@ -45,6 +49,10 @@ public class TransactionService {
 	public String withdrawal(Transaction transaction) {
 		TransactionEntity entity = new TransactionEntity();
 		UserEntity user = userRepo.findById(transaction.getUid()).get();
+		
+		if(!user.getActionEntity().isWithdrawal()) {
+			return "unAuthorized";
+		}
 		
 		if(transaction.getAmount()>user.getAccountBalance()) {
 			return "lowBal";
@@ -65,6 +73,10 @@ public class TransactionService {
 	public String transfer(Transaction transaction) {
 		TransactionEntity entity = new TransactionEntity();
 		UserEntity user = userRepo.findById(transaction.getUid()).get();
+		
+		if(!user.getActionEntity().isTransfer()) {
+			return "unAuthorized";
+		}
 		
 		UserEntity user2 = userRepo.findByAccountNumber(transaction.getSecondaryAccountNumber());
 		

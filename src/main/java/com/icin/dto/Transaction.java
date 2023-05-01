@@ -8,6 +8,7 @@ public class Transaction {
 	private Long amount;
 	private String refrenceNumber;
 	private String description;
+	private String holderName;
 	
 	public Integer getUid() {
 		return uid;
@@ -44,5 +45,11 @@ public class Transaction {
 	}
 	public String getDescription() {
 		return description;
+	}
+	public void setHolderName(String holderName) {
+		this.holderName = holderName;
+	}
+	public String getHolderName() {
+		return holderName;
 	}
 }
