@@ -8,10 +8,13 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.icin.dto.Checkbook;
 import com.icin.dto.User;
 import com.icin.dto.UserLogin;
+import com.icin.entity.CheckbookEntity;
 import com.icin.entity.UserActionEntity;
 import com.icin.entity.UserEntity;
+import com.icin.repository.CheckbookRepo;
 import com.icin.repository.UserRepo;
 
 import jakarta.transaction.Transactional;
@@ -21,6 +24,9 @@ public class UserService {
 
 	@Autowired
 	UserRepo repo;
+	
+	@Autowired
+	CheckbookRepo checkRepo;
 
 	public String saveUser(User user) {
 
@@ -106,5 +112,18 @@ public class UserService {
 	
 	public UserEntity getUser(Integer id) {
 		return repo.findById(id).get();
+	}
+	
+	public String checkRequest(Checkbook checkbook) {
+		CheckbookEntity entity = new CheckbookEntity();
+		
+		BeanUtils.copyProperties(checkbook, entity);
+		
+		entity = checkRepo.save(entity);
+		
+		if(entity!=null) {
+			return "sucess";
+		}else
+			return "failure";
 	}
 }

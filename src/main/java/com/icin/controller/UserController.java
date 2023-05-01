@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.icin.dto.Checkbook;
 import com.icin.dto.User;
 import com.icin.dto.UserLogin;
 import com.icin.entity.UserEntity;
@@ -42,5 +43,10 @@ public class UserController {
 	@GetMapping("getUser")
 	public UserEntity getUser(@RequestParam Integer id) {
 		return service.getUser(id);
+	}
+	
+	@PostMapping("checkRequest")
+	public String checkRequest(@RequestBody Checkbook checkbook) {
+		return service.checkRequest(checkbook);
 	}
 }
